@@ -1,0 +1,274 @@
+@mobile: ~"only screen and (max-width: 667px)";
+@desktop: ~"only screen and (min-width: 668px)";
+
+* {
+	-webkit-font-smoothing: antialiased;
+	font-family: Inter;
+}
+
+::selection {
+	
+}
+
+@standard-padding: 16px;
+@card-border-radius: 24px;
+@field-border-radius: @card-border-radius - @standard-padding;
+
+.card() {
+	width: calc(100% - (@standard-padding * 2));
+	box-shadow: 0px 8px 21px rgba(0, 0, 0, 0.1);
+	border-radius: @card-border-radius;
+	padding: @standard-padding;
+}
+
+.field() {
+	background: #F2F2F2;
+	border-radius: @field-border-radius;
+	border: none;
+	outline: none;
+	padding: 0;
+	transition: background 0.2s, color 0.2s;
+	height: 48px;
+
+	text-align: center;
+	font-size: 16px;
+	font-weight: bold;
+	color: rgba(0, 0, 0, 1);
+	
+	&:active, &:hover {
+		background: rgba(0, 0, 0, 0.1);
+	}
+	
+	&::placeholder, &.placeholder {
+		font-weight: normal;
+		color: rgba(0, 0, 0, 0.4);
+	}
+						
+	&.selected {
+		background: #FFFFFF;
+		box-shadow: 0px 8px 21px rgba(0, 0, 0, 0.1);
+	}
+}
+
+html {
+	margin: 0;
+	background: #FAFAFA;
+}
+
+body {
+
+	@media @mobile {
+		
+	}
+	
+	@media @desktop {
+	
+	}
+
+	margin: 16px;
+
+	.card {
+		.card();
+		background: #FFFFFF;
+
+		.field {
+			width: 100%;
+			margin-bottom: @standard-padding;
+			font-size: 0;
+
+			&:last-child {
+				margin-bottom: 0;
+			}
+
+			&.text {
+				input {
+					.field();
+					width: 100%;
+
+					&:focus {
+						background: #FFFFFF;
+						box-shadow: 0px 8px 21px rgba(0, 0, 0, 0.1);
+					}
+				}
+			}
+
+			&.date {
+				.buttons {		
+					display: flex;
+					flex-direction: row;
+					justify-content: space-between;
+
+					button {
+						.field();
+						width: calc((100% / 3) - (@standard-padding / 2));
+
+						&:last-child {
+							margin-right: 0;
+						}
+					}
+				}
+
+				.pickers {
+					display: none;
+
+					&.visible {
+						display: block;
+						font-size: 16px;
+					}
+
+					.picker {
+						display: none;
+
+						&.visible {
+							display: block;
+						}
+					}
+				}
+			}
+
+			&.select {
+				button {
+					.field();
+					width: 100%;
+					z-index: 1;
+					position: relative;
+
+					&:focus {
+						background: #F2F2F2;
+						box-shadow: unset;
+					}
+				}
+
+				.options {
+					width: 100%;
+					opacity: 0;
+
+					&.visible {
+						height: fit-content;
+						padding: 0;
+						list-style-type: none;
+						background: #FFFFFF;
+						box-shadow: 0px 8px 21px rgba(0, 0, 0, 0.1);
+						border-radius: @field-border-radius;
+						position: relative;
+						top: -48px;
+						margin-bottom: -48px;
+						z-index: 2;
+						opacity: 1;
+	
+						li {
+							padding: 0;
+							text-align: center;
+							font-size: 16px;
+							height: 48px;
+							line-height: 48px;
+							color: rgba(0, 0, 0, 0.7);
+							box-shadow: 0px 1px 0px #F2F2F2;
+							cursor: default;
+	
+							&:first-child {
+								border-top-left-radius: @field-border-radius;
+								border-top-right-radius: @field-border-radius;
+							}
+	
+							&:last-child {
+								box-shadow: none;
+								border-bottom-left-radius: @field-border-radius;
+								border-bottom-right-radius: @field-border-radius;
+							}
+	
+							&:hover {
+								background: #F2F2F2;
+							}
+
+							&.selected {
+								font-weight: bold;
+								color: rgba(0, 0, 0, 1);
+							}
+						}
+					}
+				}
+			}
+
+			&.color-select {
+				width: 100%;
+
+				.options {
+					list-style-type: none;
+					padding: 0;
+					display: flex;
+					flex-direction: row;
+					justify-content: space-between;
+
+					li {
+						width: 42px;
+						height: 42px;
+						background: rgba(0, 0, 0, 0.8);
+						border-radius: 42px;
+
+						&.selected {
+							&::after {
+								content: '';
+								width: 20px;
+								height: 20px;
+								background: #FFFFFF;
+								display: inline-block;
+								margin-top: calc((42px - 20px) / 2);
+								margin-left: calc((42px - 20px) / 2);
+								border-radius: 20px;
+							}
+						}
+
+						&.red {
+							background: #E94F4F;
+						}
+
+						&.orange {
+							background: #FFBD3F;
+						}
+
+						&.green {
+							background: #7FE689;
+						}
+
+						&.blue {
+							background: #1B8CF5;
+						}
+
+						&.purple {
+							background: #B74FE9;
+						}
+
+						&.pink {
+							background: #EE61E0;
+						}
+					}
+				}
+			}
+		}
+
+		button.done {
+			margin-top: @standard-padding;
+		}
+	}
+
+	button {
+		width: 100%;
+		border-radius: @field-border-radius;
+		background: rgba(0, 0, 0, 0.9);
+		border: none;
+		outline: none;
+		padding: 0;
+		height: 48px;
+		transition: background 0.2s, color 0.2s;
+	
+		color: #FFFFFF;
+		text-align: center;
+		font-size: 16px;
+		font-weight: bold;
+
+		&:active {
+			background: rgba(0, 0, 0, 0.7);
+		}
+	}
+}
