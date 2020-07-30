@@ -20,6 +20,7 @@
 	box-shadow: 0px 8px 21px rgba(0, 0, 0, 0.1);
 	border-radius: @card-border-radius;
 	padding: @standard-padding;
+	margin-bottom: @standard-padding;
 }
 
 .field() {
@@ -96,11 +97,7 @@ body {
 					width: 100%;
 					-webkit-appearance: none;
 
-					&:focus {
-						// TODO: Align this with click
-						background: #FFFFFF;
-						box-shadow: 0px 8px 21px rgba(0, 0, 0, 0.1);
-
+					&.selected {
 						&::placeholder {
 							color: transparent;
 						}
@@ -187,7 +184,6 @@ body {
 						opacity: 1;
 	
 						li {
-							// TODO: Increase tap target size
 							padding: 0;
 							text-align: center;
 							font-size: 16px;
